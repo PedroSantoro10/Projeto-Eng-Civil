@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Relatório — Planta</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <h1>Relatório — Planta</h1>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Terreno</h2>
+        <pre class="report-block">{{ terreno_report }}</pre>
+      </section>
+
+      <section class="card">
+        <h2>Cômodos</h2>
+        <pre class="report-block">{{ comodos_report }}</pre>
+      </section>
+
+      {% if terrap_report %}
+      <section class="card">
+        <h2>Terraplenagem</h2>
+        <pre class="report-block">{{ terrap_report }}</pre>
+      </section>
+      {% endif %}
+
+      <p><a class="btn" href="/">← Voltar</a></p>
+    </main>
+
+    <footer class="footer">
+      <div class="container">Gerado pelo Planta Generator</div>
+    </footer>
+  </body>
+</html>
