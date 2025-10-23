@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Planta — Gerador</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <h1>Planta — Gerador</h1>
+        <p class="subtitle">Rápido, claro e profissional — calcule áreas e estimativas</p>
+      </div>
+    </header>
+
+    <main class="container grid">
+      <section class="card">
+        <h2>Terreno</h2>
+        <form id="mainForm" action="/report" method="post">
+          <div class="row">
+            <label>Largura (m)
+              <input name="largura" id="largura" type="number" step="0.1" required>
+            </label>
+            <label>Comprimento (m)
+              <input name="comprimento" id="comprimento" type="number" step="0.1" required>
+            </label>
+          </div>
+
+          <h3>Cômodos</h3>
+          <p class="muted">Adicione cômodos um por vez e veja a área total atualizada em tempo real.</p>
+          <div id="comodosList" class="comodos-list"></div>
+
+          <div class="row">
+            <input id="nomeComodo" placeholder="Nome (ex: quarto)" />
+            <input id="dimsComodo" placeholder="Dimensões (ex: 3x4)" />
+            <button type="button" id="addComodoBtn" class="btn">Adicionar</button>
+          </div>
+
+          <div class="preview card small">
+            <strong>Área total de cômodos:</strong>
+            <div id="areaTotal">0.0 m²</div>
+          </div>
+
+          <!-- campos ocultos para submissão -->
+          <textarea name="comodos_text" id="comodosText" style="display:none"></textarea>
+
+          <h3>Terraplenagem (opcional)</h3>
+          <label class="checkbox"><input type="checkbox" name="do_terraplenagem" id="do_terraplenagem"> Estimar terraplenagem</label>
+          <div id="terrapOptions" style="display:none">
+            <label>Profundidade média (m)
+              <input name="profundidade" id="profundidade" type="number" step="0.01">
+            </label>
+            <label>Material
+              <select name="material">
+                {% for k,v in materiais.items() %}
+                <option value="{{k}}">{{k}} — R$ {{v}}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label>Custo mão-de-obra (R$/m³)
+              <input name="custo_mao_obra" id="custo_mao_obra" type="number" step="0.1">
+            </label>
+            <label>Contingência (%)
+              <input name="contingencia" id="contingencia" type="number" step="0.1" value="10">
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Gerar relatório</button>
+            <button type="button" id="resetBtn" class="btn ghost">Limpar</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="card sidebar">
+        <h3>Ajuda rápida</h3>
+        <ul>
+          <li>Dimensões aceitas: <code>3x4</code>, <code>3.5x4</code> ou <code>3 4</code>.</li>
+          <li>Use o botão <strong>Adicionar</strong> para criar a planta interativamente.</li>
+          <li>Quando terminar, clique em <strong>Gerar relatório</strong>.</li>
+        </ul>
+        <hr>
+        <h4>Presets</h4>
+        <p class="muted">Também é possível usar presets se preferir um modelo pronto (no modo interativo do CLI).</p>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div class="container">Planta Generator — Simples e profissional</div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+
