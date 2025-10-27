@@ -57,3 +57,32 @@ document.getElementById('calcComodos').addEventListener('click', ()=>{
 });
 
 document.getElementById('limparComodos').addEventListener('click', ()=>{document.getElementById('comodosText').value='';document.getElementById('saidaComodos').textContent='';});
+
+// Export to PDF
+document.getElementById('exportPdf').addEventListener('click', ()=>{
+  try{
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 12;
+    doc.setFontSize(14);
+    doc.text('Relatório - Calculadora de Engenharia', 14, y);
+    y += 8;
+
+    const terrenoText = document.getElementById('saidaTerreno').textContent || 'Nenhum terreno calculado.';
+    doc.setFontSize(11);
+    doc.text('--- Terreno ---', 14, y); y+=6;
+    terrenoText.split('\n').forEach(line=>{doc.text(line, 14, y); y+=6}); y+=4;
+
+    const terraText = document.getElementById('saidaTerra').textContent || 'Nenhuma terraplenagem calculada.';
+    doc.text('--- Terraplenagem ---', 14, y); y+=6;
+    terraText.split('\n').forEach(line=>{doc.text(line, 14, y); y+=6}); y+=4;
+
+    const comodosText = document.getElementById('saidaComodos').textContent || 'Nenhum cômodo informado.';
+    doc.text('--- Cômodos ---', 14, y); y+=6;
+    comodosText.split('\n').forEach(line=>{doc.text(line, 14, y); y+=6});
+
+    doc.save('relatorio-adrine.pdf');
+  }catch(e){
+    alert('Falha ao gerar PDF: ' + e.message);
+  }
+});
