@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calculadora de Engenharia — Adrine Souza de Albuquerque</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Calculadora de Engenharia</h1>
+    <p class="subtitle">Projeto de Adrine Souza de Albuquerque — cálculos rápidos de terreno e terraplenagem</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Dados do Terreno</h2>
+      <label>Largura (m): <input id="largura" type="number" step="0.01" min="0"></label>
+      <label>Comprimento (m): <input id="comprimento" type="number" step="0.01" min="0"></label>
+      <div class="row">
+        <button id="calcTerreno">Calcular Área/Perímetro</button>
+        <button id="limparTerreno">Limpar</button>
+      </div>
+      <pre id="saidaTerreno" class="saida"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Terraplenagem</h2>
+      <label>Profundidade / Altura (m): <input id="profundidade" type="number" step="0.01" min="0"></label>
+      <label>Material: 
+        <select id="material">
+          <option value="aterro" selected>Aterro (R$ 80.00/m³)</option>
+          <option value="areia">Areia (R$ 60.00/m³)</option>
+          <option value="brita">Brita (R$ 150.00/m³)</option>
+        </select>
+      </label>
+      <label>Custo mão-de-obra (R$/m³): <input id="custoMO" type="number" step="0.01" min="0" value="30"></label>
+      <label>Contingência (%): <input id="contingencia" type="number" step="0.1" min="0" value="10"></label>
+      <div class="row">
+        <button id="calcTerra">Estimar Terraplenagem</button>
+        <button id="limparTerra">Limpar</button>
+      </div>
+      <pre id="saidaTerra" class="saida"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Planta de Cômodos (entrada rápida)</h2>
+      <p>Informe cada cômodo em uma linha: nome LxC (ex: quarto 3x4)</p>
+      <textarea id="comodosText" rows="6" placeholder="quarto 3x4\nsala 4x3"></textarea>
+      <div class="row">
+        <button id="calcComodos">Calcular Áreas</button>
+        <button id="limparComodos">Limpar</button>
+      </div>
+      <pre id="saidaComodos" class="saida"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <strong>Adrine Souza de Albuquerque</strong> — Ferramenta de apoio - não substitui projeto técnico.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
