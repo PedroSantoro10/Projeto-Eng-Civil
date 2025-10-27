@@ -1,0 +1,8 @@
+[build]
+  publish = "Projeto-Adrine"
+  # comando de build vazio porque este é um site estático (HTML/CSS/JS)
+  command = ""
+
+[context.production.environment]
+  # variáveis de ambiente de exemplo (se precisar)
+  # EXAMPLE_VAR = "value"
