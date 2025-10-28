@@ -75,24 +75,34 @@ main, header, footer, .card{position: relative; z-index: 1}
    Use this when you want the image shown entirely (no zoom/crop). */
 
 body.site-bg-nozoom{
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.65), rgba(11,13,15,0.65)), url('static/site-adrine-photo.jpg?v=4');
+	/* use responsive variants (prefer WebP) and show full image without cropping */
 	background-position: center center;
-		background-size: contain; /* ensure full image fits without cropping */
+	background-size: contain; /* ensure full image fits without cropping */
 	background-repeat: no-repeat;
 	background-attachment: scroll;
-	/* keep a solid base color when the image doesn't cover the whole viewport */
 	background-color: var(--bg);
+	background-image: image-set(
+		url('static/site-adrine-photo-1920.webp?v=6') type('image/webp') 1x,
+		url('static/site-adrine-photo-3840.webp?v=6') type('image/webp') 2x,
+		url('static/site-adrine-photo-1920.jpg?v=6') type('image/jpeg') 1x,
+		url('static/site-adrine-photo-3840.jpg?v=6') type('image/jpeg') 2x
+	);
+	position: relative;
 }
 
 /* On large viewports, scale image to full width but keep aspect ratio (no cropping).
 	 This makes the image fill the horizontal space while preserving all content. */
-@media (min-width: 1100px) {
-	body.site-bg-nozoom{
-		background-size: 100% auto; /* full-width, height adjusts to maintain aspect */
-		background-position: center top; /* favor top-center composition on wide screens */
-		/* slightly reduce overlay on wide screens so image shows through more */
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.5), rgba(11,13,15,0.45)), url('static/site-adrine-photo.jpg?v=4');
-	}
+/* Keep contain for site-bg-nozoom on all viewports so the full image is visible.
+   If you prefer full-width on very large screens, we can change this later. */
+
+/* apply overlay for nozoom variant as well */
+body.site-bg-nozoom::before{
+	content: '';
+	position: fixed;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(11,13,15,0.68), rgba(11,13,15,0.52));
+	pointer-events: none;
+	z-index: 0;
 }
 
 /* Make panels slightly more opaque over background */

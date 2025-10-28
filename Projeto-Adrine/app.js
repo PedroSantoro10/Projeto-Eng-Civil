@@ -107,9 +107,11 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
     (function(){
       const chk = document.getElementById('bgMode');
       if(!chk) return;
-      const saved = localStorage.getItem('adrine_bg_mode') || 'cover';
-      chk.checked = saved === 'contain';
-      document.body.style.backgroundSize = saved === 'contain' ? 'contain' : 'cover';
+      const saved = localStorage.getItem('adrine_bg_mode');
+      // if page is loaded with nozoom body class and no saved pref, default to contain
+      const defaultMode = document.body.classList.contains('site-bg-nozoom') && !saved ? 'contain' : (saved || 'cover');
+      chk.checked = defaultMode === 'contain';
+      document.body.style.backgroundSize = defaultMode === 'contain' ? 'contain' : 'cover';
       chk.addEventListener('change', ()=>{
         const mode = chk.checked ? 'contain' : 'cover';
         document.body.style.backgroundSize = mode === 'contain' ? 'contain' : 'cover';
