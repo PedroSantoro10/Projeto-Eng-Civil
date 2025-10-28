@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="site-bg-nozoom">
+  <!-- Decorative side fills: two fixed elements that use the same photo and a blur/mask
+       to visually extend the image to the left and right while the centered image
+       remains shown in `contain` mode. aria-hidden because these are purely visual. -->
+  <div class="bg-edges" aria-hidden="true">
+    <div class="edge left"></div>
+    <div class="edge right"></div>
+  </div>
   <header>
     <div class="brand">
       <div class="logo">Adrine</div>

@@ -110,3 +110,30 @@ body.site-bg-nozoom::before{
 
 /* Ensure header stands out */
 .brand .logo{box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+
+/* Edge fillers: visually extend the background image to left/right so 'contain' mode
+	 still feels full-screen. Elements are fixed, blurred, and masked to blend.
+	 They use the same responsive image-set as the primary background so caching
+	 benefits apply. Hidden on small screens to save paint cost. */
+.bg-edges{position:fixed;inset:0;pointer-events:none;z-index: -1;display:block}
+.bg-edges .edge{position:absolute;top:0;bottom:0;width:22vw;min-width:160px;background-repeat:no-repeat;background-position:center center;background-size:cover;filter:blur(14px) saturate(0.95) contrast(0.95);transform:scaleX(1.05);opacity:0.92}
+.bg-edges .edge.left{left:0;background-image: image-set(
+		url('static/site-adrine-photo-1920.webp?v=6') type('image/webp') 1x,
+		url('static/site-adrine-photo-3840.webp?v=6') type('image/webp') 2x,
+		url('static/site-adrine-photo-1920.jpg?v=6') type('image/jpeg') 1x,
+		url('static/site-adrine-photo-3840.jpg?v=6') type('image/jpeg') 2x
+	);mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%);-webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%)}
+.bg-edges .edge.right{right:0;background-image: image-set(
+		url('static/site-adrine-photo-1920.webp?v=6') type('image/webp') 1x,
+		url('static/site-adrine-photo-3840.webp?v=6') type('image/webp') 2x,
+		url('static/site-adrine-photo-1920.jpg?v=6') type('image/jpeg') 1x,
+		url('static/site-adrine-photo-3840.jpg?v=6') type('image/jpeg') 2x
+	);mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%);-webkit-mask-image: linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0) 100%)}
+
+/* Place edge-fill behind the overlay but above the page background. We used
+	 z-index:-1 for the edges container; the overlay pseudo-element uses z-index:0
+	 and content uses z-index:1, so adjust edge z-index to sit between them. */
+body.site-bg .bg-edges, body.site-bg-nozoom .bg-edges{z-index:0}
+body.site-bg::before, body.site-bg-nozoom::before{z-index:1}
+
+@media(max-width:760px){.bg-edges{display:none}}
