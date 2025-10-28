@@ -86,3 +86,19 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
     alert('Falha ao gerar PDF: ' + e.message);
   }
 });
+
+    // Background composition controls
+    ;(function(){
+      const sel = document.getElementById('bgPos');
+      if(!sel) return;
+      // load saved value or default
+      const saved = localStorage.getItem('adrine_bg_pos') || 'center top';
+      sel.value = saved;
+      document.body.style.backgroundPosition = saved;
+
+      sel.addEventListener('change', ()=>{
+        const v = sel.value;
+        document.body.style.backgroundPosition = v;
+        localStorage.setItem('adrine_bg_pos', v);
+      });
+    })();

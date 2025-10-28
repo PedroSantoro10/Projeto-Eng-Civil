@@ -28,6 +28,10 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:13px}
 .footer-actions{margin-top:10px}
 .export-btn{background:var(--accent); color:#071218; padding:8px 12px; border-radius:6px}
 
+.bg-controls{margin-top:12px;display:flex;gap:8px;align-items:center;justify-content:center}
+.bg-controls label{color:var(--muted);font-size:13px}
+.bg-controls select{padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#e6eef3}
+
 /* Background image support: place your image at Projeto-Adrine/static/site-adrine.jpeg */
 /* Default (cover) - keeps the original dark overlay */
 body.site-bg{
