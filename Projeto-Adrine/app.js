@@ -113,6 +113,6 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
     // if SVG fails to load, clear background-image so the page gradient shows
     document.body.style.backgroundImage = "linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75))";
   };
-  // attempt to load the SVG to force browser request; add version to bust cache
-  test.src = 'static/site-adrine.svg?v=2';
+  // attempt to load the JPG to force browser request; add version to bust cache
+  test.src = 'static/site-adrine-photo.jpg?v=4';
 })();
