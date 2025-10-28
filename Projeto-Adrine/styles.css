@@ -35,8 +35,8 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:13px}
 /* Background image support: place your image at Projeto-Adrine/static/site-adrine.jpeg */
 /* Default (cover) - keeps the original dark overlay */
 body.site-bg{
-	/* prefer vector SVG (crisp), fallback to JPEG for older browsers */
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.svg');
+	/* prefer vector SVG (crisp) with cache-bust query */
+	background-image: linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.svg?v=2');
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -49,8 +49,9 @@ body.site-bg{
 /* No-zoom variant: show the whole image without cropping. This uses `contain` so the
    full image is visible; empty space is filled by the page background gradient.
    Use this when you want the image shown entirely (no zoom/crop). */
+
 body.site-bg-nozoom{
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.65), rgba(11,13,15,0.65)), url('static/site-adrine.jpeg');
+	background-image: linear-gradient(180deg, rgba(11,13,15,0.65), rgba(11,13,15,0.65)), url('static/site-adrine.svg?v=2');
 	background-position: center center;
 		background-size: contain; /* ensure full image fits without cropping */
 	background-repeat: no-repeat;
@@ -66,7 +67,7 @@ body.site-bg-nozoom{
 		background-size: 100% auto; /* full-width, height adjusts to maintain aspect */
 		background-position: center top; /* favor top-center composition on wide screens */
 		/* slightly reduce overlay on wide screens so image shows through more */
-		background-image: linear-gradient(180deg, rgba(11,13,15,0.5), rgba(11,13,15,0.45)), url('static/site-adrine.jpeg');
+		background-image: linear-gradient(180deg, rgba(11,13,15,0.5), rgba(11,13,15,0.45)), url('static/site-adrine.svg?v=2');
 	}
 }
 

@@ -110,9 +110,9 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
     // loaded, nothing to do (SVG supported)
   };
   test.onerror = function(){
-    // replace SVG with JPEG fallback if error
-    document.body.style.backgroundImage = "linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.jpeg')";
+    // if SVG fails to load, clear background-image so the page gradient shows
+    document.body.style.backgroundImage = "linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75))";
   };
-  // attempt to load the SVG as data URL to check browser parsing
-  test.src = 'static/site-adrine.svg';
+  // attempt to load the SVG to force browser request; add version to bust cache
+  test.src = 'static/site-adrine.svg?v=2';
 })();
