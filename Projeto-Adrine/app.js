@@ -102,3 +102,17 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
         localStorage.setItem('adrine_bg_pos', v);
       });
     })();
+
+// Fallback: check if SVG background paints; if not, fallback to JPEG
+(function(){
+  const test = new Image();
+  test.onload = function(){
+    // loaded, nothing to do (SVG supported)
+  };
+  test.onerror = function(){
+    // replace SVG with JPEG fallback if error
+    document.body.style.backgroundImage = "linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.jpeg')";
+  };
+  // attempt to load the SVG as data URL to check browser parsing
+  test.src = 'static/site-adrine.svg';
+})();

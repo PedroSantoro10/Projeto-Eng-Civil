@@ -35,13 +35,16 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:13px}
 /* Background image support: place your image at Projeto-Adrine/static/site-adrine.jpeg */
 /* Default (cover) - keeps the original dark overlay */
 body.site-bg{
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.jpeg');
+	/* prefer vector SVG (crisp), fallback to JPEG for older browsers */
+	background-image: linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine.svg');
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	/* use scroll to avoid some browser scaling/blur artifacts with fixed backgrounds */
 	background-attachment: scroll;
 }
+
+/* If browser doesn't support SVG as background-image, the JPEG is still present in the repo
+   but CSS fallback ordering isn't guaranteed — we also add a small JS fallback if needed. */
 
 /* No-zoom variant: show the whole image without cropping. This uses `contain` so the
    full image is visible; empty space is filled by the page background gradient.
