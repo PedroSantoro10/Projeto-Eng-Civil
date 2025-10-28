@@ -42,10 +42,15 @@ body.site-bg{
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
-	/* fallback single-image (cache-busted) */
-	background-image: url('static/site-adrine-photo.jpg?v=5');
-	/* prefer image-set when browsers support multiple densities (placeholders for now) */
-	background-image: image-set(url('static/site-adrine-photo.jpg?v=5') 1x, url('static/site-adrine-photo.jpg?v=5') 2x);
+	/* responsive variants (prefers WebP). v6 indicates generated variants */
+	background-image: url('static/site-adrine-photo-1920.jpg?v=6');
+	/* Use image-set to serve WebP for supporting browsers and 2x for retina */
+	background-image: image-set(
+		url('static/site-adrine-photo-1920.webp?v=6') type('image/webp') 1x,
+		url('static/site-adrine-photo-3840.webp?v=6') type('image/webp') 2x,
+		url('static/site-adrine-photo-1920.jpg?v=6') type('image/jpeg') 1x,
+		url('static/site-adrine-photo-3840.jpg?v=6') type('image/jpeg') 2x
+	);
 	position: relative;
 }
 
