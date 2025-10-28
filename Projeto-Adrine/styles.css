@@ -34,14 +34,33 @@ footer{text-align:center;padding:18px;color:var(--muted);font-size:13px}
 
 /* Background image support: place your image at Projeto-Adrine/static/site-adrine.jpeg */
 /* Default (cover) - keeps the original dark overlay */
+/* Use the photo as background. We add a ::before overlay for consistent darkness
+   and better legibility of content. image-set is a placeholder for future
+   responsive/retina variants. */
 body.site-bg{
-	/* use actual site photo (JPEG) as background with cache-bust */
-	background-image: linear-gradient(180deg, rgba(11,13,15,0.75), rgba(11,13,15,0.75)), url('static/site-adrine-photo.jpg?v=4');
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
+	/* fallback single-image (cache-busted) */
+	background-image: url('static/site-adrine-photo.jpg?v=5');
+	/* prefer image-set when browsers support multiple densities (placeholders for now) */
+	background-image: image-set(url('static/site-adrine-photo.jpg?v=5') 1x, url('static/site-adrine-photo.jpg?v=5') 2x);
+	position: relative;
 }
+
+/* dark overlay to ensure panels are readable over the photo */
+body.site-bg::before{
+	content: '';
+	position: fixed;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(11,13,15,0.68), rgba(11,13,15,0.52));
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* make sure page content sits above the overlay */
+main, header, footer, .card{position: relative; z-index: 1}
 
 /* If browser doesn't support SVG as background-image, the JPEG is still present in the repo
    but CSS fallback ordering isn't guaranteed — we also add a small JS fallback if needed. */
