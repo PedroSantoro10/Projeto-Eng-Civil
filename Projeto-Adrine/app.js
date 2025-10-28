@@ -103,6 +103,20 @@ document.getElementById('exportPdf').addEventListener('click', ()=>{
       });
     })();
 
+    // Toggle between cover and contain modes (show full image without crop)
+    (function(){
+      const chk = document.getElementById('bgMode');
+      if(!chk) return;
+      const saved = localStorage.getItem('adrine_bg_mode') || 'cover';
+      chk.checked = saved === 'contain';
+      document.body.style.backgroundSize = saved === 'contain' ? 'contain' : 'cover';
+      chk.addEventListener('change', ()=>{
+        const mode = chk.checked ? 'contain' : 'cover';
+        document.body.style.backgroundSize = mode === 'contain' ? 'contain' : 'cover';
+        localStorage.setItem('adrine_bg_mode', mode);
+      });
+    })();
+
 // Fallback: check if SVG background paints; if not, fallback to JPEG
 (function(){
   const test = new Image();
